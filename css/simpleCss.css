@@ -1,0 +1,22 @@
+/*
+Author : echo0 
+Email   : ech0.extreme@foxmail.com
+
+*/
+/* 
+    Created on : May 13, 2017, 9:59:52 PM
+    Author     : Ech0
+*/
+
+
+body{
+    background-color: #F596AA;
+}
+#heart{
+    color:   #eb423d;
+    position: absolute;   
+    top: 50%;   
+    left: 50%;   
+    transform: translate(-50%, -50%);   
+    letter-spacing: 0px;
+}

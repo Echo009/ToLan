@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+Author : echo0 
+Email   : ech0.extreme@foxmail.com
+Time    : 2017年5月20日15:58:57
+-->
+<!--第一个写个LAN的页面啊-->
+<html>
+    <head>
+        <title>Hidden Heart </title>
+        <meta charset="UTF-8">
+        <link href="../css/simpleCss.css" type="text/css" rel="stylesheet" >
+        <script type="text/javascript" src="../lib/jquery.min.js"></script>
+        <script type="text/javascript" src="../lib/jscex.min.js"></script>
+        <script type="text/javascript" src="../lib/jscex-parser.js"></script>
+        <script type="text/javascript" src="../lib/jscex-jit.js"></script>
+        <script type="text/javascript" src="../lib/jscex-builderbase.min.js"></script>
+        <script type="text/javascript" src="../lib/jscex-async.min.js"></script>
+        <script type="text/javascript" src="../lib/jscex-async-powerpack.min.js"></script>
+        <script type="text/javascript" src="../functions/functions.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../functions/love.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../functions/draw.js"></script>
+        <script src="../sweetAlert/dist/sweetalert.min.js"></script>
+        <script src="../customUI/myAlert.js"></script>
+        <link rel="stylesheet" type="text/css" href="../sweetAlert/dist/sweetalert.css">
+        <link rel="shortcut icon" href="../img/heart.ico" />
+        
+    </head>
+    <body>
+        <audio id="music" src="../music/piao.mp3" loop preload autoplay="true"></audio>
+        <div id="heart" hidden="true"></div>
+        <style type="text/css">
+            @font-face {
+                font-family: say;
+                src: url('../font/say') format("truetype");
+                font-style:oblique;
+            }
+        </style>
+        <script>
+            var imgs = new Array();
+            (function preLoadImg() {//预加载图片 ，暂时就手动初始化吧。
+                imgs[0] = new Image();
+                imgs[0].src = "../img/herfavorite/stare.jpg";
+                imgs[1] = new Image();
+                imgs[1].src = "../img/herfavorite/dislike.jpg";
+                imgs[2] = new Image();
+                imgs[2].src = "../img/herfavorite/fuck.jpg";
+                imgs[3] = new Image();
+                imgs[3].src = "../img/herfavorite/hh.jpg";
+                imgs[4] = new Image();
+                imgs[4].src = "../img/herfavorite/jy.jpg";
+                imgs[5] = new Image();
+                imgs[5].src = "../img/herfavorite/mmp.jpg";
+                imgs[6] = new Image();
+                imgs[6].src = "../img/herfavorite/xhn.jpg";
+                imgs[7] = new Image();
+                imgs[7].src = "../img/herfavorite/zb.jpg";
+            })();
+            printHeart('heart');
+            var textAnimate = eval(Jscex.compile("async", function () {
+                $("#heart").show().typewriter_final(2);
+            }));
+
+            function showHeart() {
+                alert(" biu   ,  ( ･_･)ﾉ⌒●~*  ");
+                $("#heart").show().typewriter_final(0);
+
+            }
+            var gotoTheme = eval(Jscex.compile("async", function () {
+                var interval = 4719;
+                $await(Jscex.Async.sleep(interval * 3));//wait 
+                say("嗯，这样就结束了吗？  ", "../img/herfavorite/jy.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("对啊，就这么多了 ~  ", "../img/herfavorite/stare.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("  (｡･ˇ_ˇ･｡:)  ", "", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("嗯，其实， 还有的  。将鼠标移到那颗心上试试 。 ", "../img/herfavorite/hh.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                $('#heart').bind("mouseover", function () {
+                    self.location = 'toLan.html';
+                });
+            }));
+            var prompt = eval(Jscex.compile("async", function () {
+                var interval = 4719;
+                say("这又是什么啊？  ", "../img/herfavorite/stare.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("嗯，这是什么呢？  ", "../img/herfavorite/dislike.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("怎么说 ，你猜 。 ", "../img/herfavorite/hh.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("(｡･ˇ_ˇ･｡:)", "", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("这或许就是爱吧！ ", "../img/herfavorite/hh.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait  
+                say("说人话 ！ ", "../img/herfavorite/dislike.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("嗯，摁下Ctrl + F ， 输入 L 或者 1 ，(●'◡'●)ﾉ❤", "../img/herfavorite/hx.jpg", 5719 + 520);
+                $await(Jscex.Async.sleep(interval + 1000 + 520));//wait 
+                gotoTheme().start();
+            }));
+
+            var dialogue = eval(Jscex.compile("async", function () {
+                var interval = 4719;
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("咦，什么东西啊？ ", "../img/herfavorite/stare.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("就给本女神看这个 ？ ？ ？ ", "../img/herfavorite/dislike.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("嗯，对啊，就是给你看这个的 ", "../img/herfavorite/hh.jpg", 1719);
+                $await(Jscex.Async.sleep(interval - 1000));//wait 
+                say("这可是你最喜欢的粉红色啊，对吧？", "../img/herfavorite/zb.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say(" ", "../img/herfavorite/mmp.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                say("当然，这是不可能的 ~", "../img/herfavorite/hh.jpg", 2719);
+                $await(Jscex.Async.sleep(interval));//wait 
+                showHeart();
+                $await(Jscex.Async.sleep(interval + 2000));//wait 
+                prompt().start();
+            }));
+
+            var runAsync = eval(Jscex.compile("async", function () {
+                textAnimate().start();
+            }));
+            dialogue().start();
+
+        </script>
+        <script src="../console/description.js"></script>
+    </body>
+</html>

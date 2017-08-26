@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<!--
+Author : echo0 
+Email   : ech0.extreme@foxmail.com
+Time    : 2017年5月25日20:44:37 
+-->
+<!--有点简陋的夜空 -->
+<html>
+    <head>
+        <title>Sky</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="../lib/jquery.min.js"></script>
+        <link rel="shortcut icon" href="../img/heart.ico" /> 
+        <script src="../lib/velocity/velocity.js"></script>
+        <script src="../sweetAlert/dist/sweetalert.min.js"></script> 
+         <link rel="stylesheet" type="text/css" href="../sweetAlert/dist/sweetalert.css">
+        <script type="text/javascript" src="../functions/functions.js" charset="utf-8"></script>
+        <style>
+            @font-face {
+                font-family: say;
+                src: url('../font/say') format("truetype");
+                font-style:oblique;
+            }
+            * {
+                padding: 0;
+                margin: 0;
+                pointer-events: none;
+            }
+            /*#060b14*/
+            body {
+                background: #000000;
+                overflow: hidden;
+                font-family: "微软雅黑", "Open Sans";
+                font-weight: 100;
+
+            }
+            a {
+                color: #4bc2f1;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            #container {
+                perspective: 50px;
+                -webkit-perspective: 50px;
+                -moz-perspective: 50px;
+                -ms-perspective: 50px;
+                transform-origin: 50% 100%;
+                -webkit-transform-origin: 50% 100%;
+                -moz-transform-origin: 50% 100%;
+                -ms-transform-origin: 50% 100%;
+                opacity: 0.55;
+            }
+
+            #welcome {
+                font-family: say,微软雅黑;
+                position: fixed;
+                width: auto;
+                left: 50%;
+                top: 45%;
+                margin-top: -1rem;
+                margin-left: -10.1rem;
+                font-weight: 200;
+                color: #ffe;
+                opacity: 0.719;
+                text-align: center;
+                font-size: 1.3rem;
+                line-height: 1.05rem;
+                letter-spacing: 0.135em;
+                word-spacing: -0.075rem;
+            }
+
+            @media screen and (max-width: 400px) {
+                #welcome {
+                    /*max priority*/
+                    font-size: 0.45rem !important; 
+                }
+            }
+
+            #browserWidthNotice {
+                font-style: italic;
+                display: none;
+            }
+
+            #logo {
+                position: fixed;
+                right: 0.75rem;
+                bottom: 0.65rem;
+                cursor: pointer;
+                text-decoration: none;
+                color: #d6d6d6;
+                font-size: 2rem;
+                z-index: 9999;
+                letter-spacing: 0.025em;
+            }
+
+            #logoDot {
+                color: #d74580;
+            }
+
+            .dot {
+                position: fixed;
+                width: 30px;
+                height: 30px;
+                border-radius: 30px;
+                background-color: #FFFFFF;
+            }
+        </style>
+    </head>
+    <body>
+        <audio id="music" src="../music/lan.mp3" loop preload autoplay="true"></audio>
+        <div id="welcome">
+            <p id="browserWidthNotice">
+                请将浏览器全屏以获得更好的体验效果。<br><br>
+            </p>
+            <p class="say">
+                沉迷于Lan色，无法自拔啊啊啊。
+            </p>
+            <br>
+            <p class="say">(〃ﾉωﾉ)</p>
+        </div>
+        <a id="logo" href="http://echo0.cn">Echo0<span id="logoDot">.</span>cn</a>
+        <div id="container"></div>
+        <script>
+            var isWebkit = /Webkit/i.test(navigator.userAgent),
+                    isChrome = /Chrome/i.test(navigator.userAgent),
+                    isMobile = !!("ontouchstart" in window),
+                    isAndroid = /Android/i.test(navigator.userAgent),
+                    isIE = document.documentMode;
+            
+            if (!isChrome) {
+                say("Please open with Chrome ! ");
+                window.location = "http://echo0.cn";
+            }
+            $.Velocity.defaults.easing = "easeInOutsine";
+            var dotsCount,
+                    dotsHtml = "",
+                    $dots;
+            if (window.location.hash) {
+                dotsCount = window.location.hash.slice(1);
+            } else {
+                dotsCount = isMobile ? (isAndroid ? 40 : 60) : (isChrome ? 175 : 125);
+            }
+            for (var i = 0; i < dotsCount; i++) {
+                dotsHtml += "<div class='dot'></div>";
+            }
+            $dots = $(dotsHtml);
+            var $container = $("#container"),
+                    $browserWidthNotice = $("#browserWidthNotice"),
+                    $welcome = $("#welcome");
+            var screenWidth = window.screen.availWidth,
+                    screenHeight = window.screen.availHeight,
+                    chromeHeight = screenHeight - (document.documentElement.clientHeight || screenHeight);
+            $.Velocity.mock=0;
+            var translateZMin = -520,
+                   translateZMax = 520;
+            var containerAnimationMap = {
+                perspective: [215, 50],
+                opacity: [0.90, 0.55],
+                rotateZ: 360,
+            };
+            if (!isIE) {
+                containerAnimationMap.rotateZ = [5, 0];
+            }
+            if ((document.documentElement.clientWidth / screenWidth) < 0.80) {
+                $browserWidthNotice.show();
+            }
+            var desc = "Go <a href='http://echo0.cn/loveLanLan/toLan.html'>To Lan\n\
+         </a><br /><br />or Talk with me\n\
+             <a href='http://wpa.qq.com/msgrd?v=3&uin=188840383&site=echo0.cn&menu=yes'>@Echo0</a>";
+            $welcome.velocity({opacity: [0, 0.65]}, {display: "none", delay: 2719, duration: 3719, complete: function () {
+                    $welcome
+                            .html(desc)
+                            .velocity({opacity: 0.75}, {duration: 3500, display: "block"})
+                            .find("*").add($welcome).css("pointer-events", "auto");
+                }});
+            $(".say").velocity({
+                color: "#F596AA",
+                colorRed: 255,
+                scale: 0.9719
+            }, {
+                duration: 1000,
+                loop: true
+            });
+            $container
+                    .css("perspective-origin", screenWidth / 2.4 + "px " + ((screenHeight * 0.45) - chromeHeight) + "px")
+                    .velocity(containerAnimationMap, {duration: 5000, loop: true, delay: 3250});
+            if (isWebkit) {
+                $dots.css("boxShadow", "0px 0px 30px 0px #005CAF ");// h-shadow v-shadow blur spread color inset
+            }
+            var dotAnimationMap={
+                translateX: [
+                            function () {
+                                return "+=" + rand(-screenWidth / 2.5, screenWidth / 2.5);
+                            },
+                            function () {
+                                return rand(0, screenWidth);
+                            }
+                        ],
+                        translateY: [
+                            function () {
+                                return "+=" + rand(-screenHeight / 2.75, screenHeight / 2.75);
+                            },
+                            function () {
+                                return rand(0, screenHeight);
+                            }
+                        ],
+                        translateZ: [
+                            function () {
+                                return "+=" + rand(translateZMin, translateZMax);
+                            },
+                            function () {
+                                return rand(translateZMin, translateZMax);
+                            }
+                        ],
+                        opacity: [
+                            function () {
+                                return Math.random();
+                            },
+                            function () {
+                                return Math.random() + 0.1;
+                            }
+                        ]
+            }
+            $dots.velocity( dotAnimationMap, {duration: 4000, loop: true}).appendTo($container);
+        </script>
+        <script src="../console/description.js"></script>
+    </body>
+</html>
+

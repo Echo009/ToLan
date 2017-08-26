@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--
+Author : echo0 
+Email   : ech0.extreme@foxmail.com
+Time    : 2017年5月31日15:39:06 
+-->
+<!--一情句话，嘻嘻-->
+<html>
+    <head>
+        <title>Words to Lan</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="../lib/jquery.min.js"></script>
+        <link rel="shortcut icon" href="../img/heart.ico" /> 
+        <script src="../lib/velocity/velocity.js"></script>
+        <script src="../lib/velocity/velocity.ui.js"></script>
+        <script src="../lib/blast-text/jquery.blast.js"></script>
+        <style>
+            body{
+                background: #ffe;
+            }
+            @font-face {
+                font-family: say;
+                src: url('../font/say') format("truetype");
+                font-style:oblique;
+            }
+            .words{
+                font-family: say;
+                position: fixed;
+                width: auto;
+                left: 50%;
+                top: 45%;
+                margin-top: -1rem;
+                margin-left: -10.1rem;
+                font-weight: 900;
+                color: #E83015;
+                opacity: 0.719;
+                text-align: center;
+                font-size: 1.5rem;
+                line-height: 1.05rem;
+                letter-spacing: 0.035em;
+                word-spacing: -0.075rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="words"> 真爱如果有颜色，那么一定是lan色的！ 对吧？</div>
+        <script>
+//            transition.shrinkIn
+//            transition.perspectiveDownIn
+            $(function () {
+                $('.words').blast({delimiter: "all"})
+                        .css("opacity", 0)
+                        .velocity("transition.perspectiveDownIn", {stagger: 150, drag: true, complete: function () {
+                                        $(this).velocity("transition.perspectiveDownOut", {stagger: 150, drag: true,backwards:true});
+                            }
+                        })
+            });
+//            $('.words').blast({delimiter: "all"})
+//                    .eq(14)
+//                    .velocity( {opacity:0}  ,function(){$(this).text("兰");})
+//                    .velocity("transition.fadeIn",{duration:2000});
+        </script>
+    </body>
+</html>
